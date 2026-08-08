@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Docker image archives
+*.tar
+*.tar.gz
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
