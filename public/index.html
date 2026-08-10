@@ -459,6 +459,8 @@
             <div class="status-grid">
 
 
+                <!-- HOSTNAME / POD -->
+
                 <div class="status-item">
 
                     <p>HOSTNAME / POD</p>
@@ -469,6 +471,8 @@
 
                 </div>
 
+
+                <!-- ENVIRONMENT -->
 
                 <div class="status-item">
 
@@ -481,6 +485,8 @@
                 </div>
 
 
+                <!-- APPLICATION VERSION -->
+
                 <div class="status-item">
 
                     <p>APPLICATION VERSION</p>
@@ -492,12 +498,14 @@
                 </div>
 
 
+                <!-- SERVICE TYPE -->
+
                 <div class="status-item">
 
-                    <p>CURRENT TIME</p>
+                    <p>SERVICE TYPE</p>
 
-                    <h3 id="time">
-                        Loading...
+                    <h3 id="service">
+                        NodePort
                     </h3>
 
                 </div>
@@ -561,21 +569,29 @@
 
         fetch("/api/info")
 
-            .then(response => response.json())
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch application information");
+                }
+
+                return response.json();
+
+            })
 
             .then(data => {
 
                 document.getElementById("hostname").textContent =
-                    data.hostname;
+                    data.hostname || "Unavailable";
 
                 document.getElementById("environment").textContent =
-                    data.environment;
+                    data.environment || "Unavailable";
 
                 document.getElementById("version").textContent =
-                    data.version;
+                    data.version || "Unavailable";
 
-                document.getElementById("time").textContent =
-                    data.time;
+                document.getElementById("service").textContent =
+                    "NodePort";
 
             })
 
@@ -585,6 +601,18 @@
                     "Unable to retrieve application information:",
                     error
                 );
+
+                document.getElementById("hostname").textContent =
+                    "Unavailable";
+
+                document.getElementById("environment").textContent =
+                    "Unavailable";
+
+                document.getElementById("version").textContent =
+                    "Unavailable";
+
+                document.getElementById("service").textContent =
+                    "NodePort";
 
             });
 

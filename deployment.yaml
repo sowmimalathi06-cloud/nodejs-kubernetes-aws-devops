@@ -20,7 +20,7 @@ spec:
       containers:
         - name: nodejs-container
 
-          image: nodejs-devops-demo:v4
+          image: nodejs-devops-demo:v5
 
           imagePullPolicy: Never
 
